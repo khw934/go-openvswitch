@@ -175,6 +175,14 @@ func Test_parseMatch(t *testing.T) {
 			m: IPv6Destination("2001:db8::1"),
 		},
 		{
+			s: "ct_ipv6_src=2001:db8::1",
+			m: CtIPv6Source("2001:db8::1"),
+		},
+		{
+			s: "ct_ipv6_dst=2001:db8::1",
+			m: CtIPv6Destination("2001:db8::1"),
+		},
+		{
 			s: "icmpv6_type=135",
 			m: ICMP6Type(135),
 		},
@@ -205,6 +213,22 @@ func Test_parseMatch(t *testing.T) {
 		{
 			s: "nw_dst=192.168.1.1",
 			m: NetworkDestination("192.168.1.1"),
+		},
+		{
+			s: "ct_nw_src=192.168.1.1",
+			m: CtNetworkSource("192.168.1.1"),
+		},
+		{
+			s: "ct_nw_dst=192.168.1.1",
+			m: CtNetworkDestination("192.168.1.1"),
+		},
+		{
+			s: "tun_src=192.168.1.1",
+			m: TunNetworkSource("192.168.1.1"),
+		},
+		{
+			s: "tun_dst=192.168.1.1",
+			m: TunNetworkDestination("192.168.1.1"),
 		},
 		{
 			s:       "nw_proto=256",

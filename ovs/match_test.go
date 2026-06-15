@@ -304,6 +304,36 @@ func TestMatchIPv4AddressOrCIDR(t *testing.T) {
 			out:  "nw_dst=192.168.1.1",
 		},
 		{
+			desc: "network source IPv4 address",
+			m:    NetworkSource("1.119.201.233/26"),
+			out:  "nw_src=1.119.201.192/26",
+		},
+		{
+			desc: "network destination IPv4 address",
+			m:    NetworkDestination("1.119.201.233/26"),
+			out:  "nw_dst=1.119.201.192/26",
+		},
+		{
+			desc: "conntrack network source IPv4 address",
+			m:    CtNetworkSource("1.119.201.233/26"),
+			out:  "ct_nw_src=1.119.201.192/26",
+		},
+		{
+			desc: "conntrack network destination IPv4 address",
+			m:    CtNetworkDestination("1.119.201.233/26"),
+			out:  "ct_nw_dst=1.119.201.192/26",
+		},
+		{
+			desc: "tunnal network source IPv4 address",
+			m:    TunNetworkSource("1.119.201.233/26"),
+			out:  "tun_src=1.119.201.192/26",
+		},
+		{
+			desc: "tunnal network destination IPv4 address",
+			m:    TunNetworkDestination("1.119.201.233/26"),
+			out:  "tun_dst=1.119.201.192/26",
+		},
+		{
 			desc: "ARP source protocol IPv4 address",
 			m:    ARPSourceProtocolAddress("192.168.1.1"),
 			out:  "arp_spa=192.168.1.1",
@@ -413,6 +443,26 @@ func TestMatchIPv6AddressOrCIDR(t *testing.T) {
 			out:  "ipv6_dst=2001:db8::1",
 		},
 		{
+			desc: "network source IPv6 address",
+			m:    IPv6Source("2001:db8::1/64"),
+			out:  "ipv6_src=2001:db8::/64",
+		},
+		{
+			desc: "network destination IPv6 address",
+			m:    IPv6Destination("2001:db8::1/64"),
+			out:  "ipv6_dst=2001:db8::/64",
+		},
+		{
+			desc: "conntrack network source IPv6 address",
+			m:    CtIPv6Source("2001:db8::1/64"),
+			out:  "ct_ipv6_src=2001:db8::/64",
+		},
+		{
+			desc: "conntrack network destination IPv6 address",
+			m:    CtIPv6Destination("2001:db8::1/64"),
+			out:  "ct_ipv6_dst=2001:db8::/64",
+		},
+		{
 			desc: "neighbor discovery target IPv6 address",
 			m:    NeighborDiscoveryTarget("2001:db8::1"),
 			out:  "nd_target=2001:db8::1",
@@ -420,22 +470,22 @@ func TestMatchIPv6AddressOrCIDR(t *testing.T) {
 		{
 			desc: "network source IPv6 CIDR",
 			m:    IPv6Source("2001:db8::1/128"),
-			out:  "ipv6_src=2001:db8::1/128",
+			out:  "ipv6_src=2001:db8::1",
 		},
 		{
 			desc: "network destination IPv6 CIDR",
 			m:    IPv6Destination("2001:db8::1/128"),
-			out:  "ipv6_dst=2001:db8::1/128",
+			out:  "ipv6_dst=2001:db8::1",
 		},
 		{
 			desc: "neighbor discovery target IPv6 CIDR",
 			m:    NeighborDiscoveryTarget("2001:db8::1/128"),
-			out:  "nd_target=2001:db8::1/128",
+			out:  "nd_target=2001:db8::1",
 		},
 		{
 			desc: "network source IPv6 CIDR (fixed bug: matches original address)",
 			m:    IPv6Source("2001:db8::a001/124"),
-			out:  "ipv6_src=2001:db8::a001/124",
+			out:  "ipv6_src=2001:db8::a000/124",
 		},
 	}
 
